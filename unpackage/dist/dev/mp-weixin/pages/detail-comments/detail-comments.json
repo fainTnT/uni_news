@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "全部评论",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#F07373",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "comments-box": "/components/comments-box/comments-box",
+    "uni-load-more": "/components/uni-load-more/uni-load-more"
+  }
+}
