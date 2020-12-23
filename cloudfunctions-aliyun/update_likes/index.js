@@ -3,7 +3,7 @@ const db = uniCloud.database()
 const dbCmd = db.command
 exports.main = async (event, context) => {
 	const {user_id,article_id} = event;
-	const userInfo = await db.collection('user').doc(user_id).get()
+	const userInfo = await db.collection('user').where({id:user_id}).get()
 	const article_id_ids = userInfo.data[0].article_likes_ids
 	
 	let dbCmdFuns = null;
@@ -14,7 +14,7 @@ exports.main = async (event, context) => {
 		dbCmdFuns = dbCmd.addToSet(article_id)
 	}
 	
-	await db.collection('user').doc(user_id).update({
+	await db.collection('user').where({id:user_id}).update({
 		article_likes_ids:dbCmdFuns
 	})
 	

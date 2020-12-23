@@ -14,7 +14,7 @@ exports.main = async (event, context) => {
 		}
 	}
 
-	let userinfo = await db.collection('user').doc(user_id).get()
+	let userinfo = await db.collection('user').where({id:user_id}).get()
 	userinfo = userinfo.data[0]
 	// label_ids =  ['label._id']
 	// 获取 label 表的数据

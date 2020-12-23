@@ -9,7 +9,7 @@ exports.main = async (event, context) => {
 		author_id
 	}=event;
 	
-	const user= await db.collection('user').doc(user_id).get();
+	const user= await db.collection('user').where({id:user_id}).get();
 	const author_likes_ids=user.data[0].author_likes_ids;
 	
 	let author_ids= null
@@ -20,7 +20,7 @@ exports.main = async (event, context) => {
 		author_ids = dbcmd.addToSet(author_id);
 	}
 	
-	await db.collection('user').doc(user_id).update({
+	await db.collection('user').where({id:user_id}).update({
 		author_likes_ids:author_ids
 	})
 	

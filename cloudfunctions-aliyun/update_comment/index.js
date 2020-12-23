@@ -14,7 +14,7 @@ exports.main = async (event, context) => {
 		is_reply = false // 是否子回复
 	} = event
 
-	let user = await db.collection('user').doc(user_id).get()
+	let user = await db.collection('user').where({id:user_id}).get()
 	// 获取用户对象
 	user = user.data[0]
 	// 获取当前的文章信息

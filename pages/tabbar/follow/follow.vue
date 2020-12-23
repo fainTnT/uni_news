@@ -60,13 +60,11 @@
 				this.$api.get_follow().then(res=>{
 					const {data}= res;
 					this.list=data;
-					
 					this.articleShow=this.list.length === 0?true:false;
 				})
 			},
 			getAuthor(){
 				this.$api.get_author().then(res=>{
-					console.log(res)
 					const {data} =res;
 					this.authorList=data;
 					this.authorShow=this.authorList.length === 0?true:false;

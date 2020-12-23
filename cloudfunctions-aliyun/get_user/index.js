@@ -15,7 +15,7 @@ exports.main = async (event, context) => {
 		}
 	}
 	
-	const userinfo= await db.collection('user').doc(user_id).get()
+	const userinfo= await db.collection('user').where({id:user_id}).get()
 	
 	//返回数据给客户端
 	return {

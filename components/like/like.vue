@@ -18,6 +18,12 @@
 					return ''
 				}
 			},
+			types2:{
+				type:String,
+				detault(){
+					return ''
+				}
+			},
 			item:{
 				type:Object,
 				default(){
@@ -43,7 +49,6 @@
 					
 				})
 				this.$api.update_likes({
-					user_id:"5fd8a26b1ee4f5000186ae23",
 					article_id:this.item._id
 				}).then(res=>{
 					uni.hideLoading()
@@ -51,7 +56,7 @@
 						title:this.isLike?'收藏成功':'取消收藏',
 						icon:'none'
 					})
-					uni.$emit('update_article',this.types)
+					uni.$emit('update_article',[this.types,this.types2])
 				}).catch(err=>{
 					uni.hideLoading()
 				})

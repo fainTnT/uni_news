@@ -56,9 +56,6 @@
 		computed:{
 			...mapState(['userInfo'])
 		},
-		onLoad() {
-			console.log(this.userInfo)
-		},
 		methods: {
 			open(){
 				uni.navigateTo({

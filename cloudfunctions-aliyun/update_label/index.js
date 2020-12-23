@@ -5,7 +5,7 @@ exports.main = async (event, context) => {
 		user_id,
 		label = []
 	} = event
-	await db.collection('user').doc(user_id).update({
+	await db.collection('user').where({id:user_id}).update({
 		label_ids: label
 	})
 	//返回数据给客户端

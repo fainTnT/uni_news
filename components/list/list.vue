@@ -49,7 +49,7 @@
 		},
 		created(){
 			uni.$on('update_article',(e)=>{
-				if(e == 'follow'){
+				if(e =='follow'||e[0]=='follow'||e[1]=='myArticle'){
 					this.catchList = {};
 					this.load = {};
 					this.getList(this.activeIndex);

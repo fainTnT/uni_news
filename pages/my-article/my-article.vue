@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<uni-load-more v-if="articleList.length === 0 && loading" status="loading" iconType="snow"></uni-load-more>
-		<list-card v-for="item in articleList" :key="item.id" :item="item"></list-card>
+		<list-card v-for="item in articleList" :key="item.id" :item="item" types2='myArticle'></list-card>
 		<view v-if="articleList.length<=0 && !loading" class="no-data">
 			当前暂无数据
 		</view>
@@ -18,6 +18,11 @@
 		},
 		onLoad(){
 			this.getMyarticle();
+			uni.$on('update_article',(e)=>{
+				if(e =='follow'||e[0]=='follow'){
+					this.getMyarticle();
+				}	
+			})
 		},
 		methods: {
 			getMyarticle(){

@@ -13,7 +13,7 @@ exports.main = async (event, context) => {
 			classify: name
 		}
 	}
-	const userInfo = await db.collection('user').doc(user_id).get()
+	const userInfo = await db.collection('user').where({id:user_id}).get()
 	const article_likes_ids = userInfo.data[0].article_likes_ids
 	// 聚合：更精细化处理数据 求和 分组 指定哪些字段
 	const list = await db.collection('article')

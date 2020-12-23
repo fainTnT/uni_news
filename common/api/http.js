@@ -3,7 +3,7 @@ import store from '../../store/index.js'
 
 export default function $http(options){
 	const dataObj = {
-		user_id:store.state.userInfo._id,
+		user_id:store.state.userInfo.id,
 		...options.data
 	}
 	return new Promise((resolve,reject) => {

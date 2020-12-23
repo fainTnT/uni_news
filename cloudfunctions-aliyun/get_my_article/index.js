@@ -7,7 +7,7 @@ exports.main = async (event, context) => {
 		user_id
 	} = event;
 	
-	let userInfo=await db.collection('user').doc(user_id).get();
+	let userInfo=await db.collection('user').where({id:user_id}).get();
 	userInfo= userInfo.data[0]
 	
 	let lists= await db.collection('article').aggregate()

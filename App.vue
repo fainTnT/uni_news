@@ -2,7 +2,7 @@
 	export default {
 		onLaunch: function() {
 			this.$api.get_user({
-				user_id:"5fd8a26b1ee4f5000186ae23"
+				user_id:"8010388"
 			}).then(res=>{
 				const {data} = res;
 				this.$store.dispatch('set_userInfo',data)

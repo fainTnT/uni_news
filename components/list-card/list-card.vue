@@ -6,7 +6,7 @@
 		<view class='card-contend'>
 			<view class='title'>
 				<text>{{item.title}}</text>
-				<like :item='item' :types='types'></like>
+				<like :item='item' :types='types' :types2='types2'></like>
 			</view>
 			<view class='tag'>{{item.classify}}</view>
 			<view class='watch'>{{item.browse_count}}浏览</view>
@@ -17,7 +17,7 @@
 	<view class='list-card-more' v-else-if="item.mode == 'column'" @click='cardClick(item)'>
 		<view class='title-more'>
 			<text>{{item.title}}</text>
-			<like :item='item' :types='types'></like>
+			<like :item='item' :types='types' :types2='types2'></like>
 		</view>
 		<view class='card-img-more'>
 			<image v-if='index < 3' v-for='(item1,index) in item.cover' :src='item1'  :key='index' mode="aspectFill"></image>
@@ -35,7 +35,7 @@
 		</view>
 		<view class='title-more'>
 			<text>{{item.title}}</text>
-			<like :item='item' :types='types'></like>
+			<like :item='item' :types='types' :types2='types2'></like>
 		</view>
 		<view class='card-contend-more'>
 			<view class='tag-more'>{{item.classify}}</view>
@@ -70,6 +70,12 @@
 		},
 		props: {
 			types:{
+				type:String,
+				detault(){
+					return '';
+				}
+			},
+			types2:{
 				type:String,
 				detault(){
 					return '';
