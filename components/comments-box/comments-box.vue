@@ -13,7 +13,10 @@
 		<view class="comments-content">
 			<view>{{comments.comment_content}}</view>
 			<view class="comments-info">
-				<view class="comments-button">回复</view>
+				<view class="comments-button" @click='commentsReply({comments,is_reply:reply})'>回复</view>
+			</view>
+			<view class='comments-reply' v-for='item in comments.replys' :key='item.comment_id'>
+				<comments-box :reply='true' :comments='item' @reply='commentsReply'></comments-box>
 			</view>
 		</view>
 	</view>
@@ -23,14 +26,22 @@
 	import {
 		parseTime
 	} from '@/utils/utils.js'
+	import commentsBox from '@/components/comments-box/comments-box.vue'
 	export default {
 		name: "comments-box",
+		components:{
+			commentsBox
+		},
 		props: {
 			comments: {
 				type: Object,
 				default () {
 					return {}
 				}
+			},
+			reply:{
+				type:Boolean,
+				default:false
 			}
 		},
 		filters: {
@@ -44,7 +55,14 @@
 			};
 		},
 		methods: {
-			
+			commentsReply(comment){
+				// 区分点击的是主回复还是子回复
+				if(comment.is_reply){
+					comment.comments.reply_id = comment.comments.comment_id
+					comment.comments.comment_id = this.comments.comment_id
+				}
+				this.$emit('reply',comment)
+			}
 		}
 	}
 </script>

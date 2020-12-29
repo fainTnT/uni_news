@@ -26,7 +26,7 @@
 			<view class="detail-comment">
 				<view class="comment-title">最新评论</view>
 				<view class="comment-content" v-for="item in commentsList" :key="item.comment_id">
-					<comments-box :comments="item"></comments-box>
+					<comments-box :comments="item" @reply='reply'></comments-box>
 				</view>
 			</view>
 		</view>
@@ -76,7 +76,8 @@ import popup from '@/components/uni-popup/uni-popup.vue'
 				noData:'<p stye="text-align:center;color:#666">加载中....</p>',
 				commentsList:[],
 				showPopup:false,
-				commentsValue:''
+				commentsValue:'',
+				replyFromData:{}
 			}
 		},
 		onLoad(query) {
@@ -87,6 +88,16 @@ import popup from '@/components/uni-popup/uni-popup.vue'
 			this.getComments()
 		},
 		methods: {
+			reply(e){
+				this.replyFromData = {
+					"comment_id":e.comments.comment_id,
+					"is_reply":e.is_reply
+				};
+				if(e.comments.reply_id){
+					this.replyFromData.reply_id=e.comments.reply_id
+				}
+				this.openComment();
+			},
 			// 请求评论内容
 			getComments(){
 				this.$api.get_comments({
@@ -185,13 +196,14 @@ import popup from '@/components/uni-popup/uni-popup.vue'
 					})
 					return
 				}
-				this.setUpdateComment(this.commentsValue)
+				console.log(this.replyFromData)
+				this.setUpdateComment({content:this.commentsValue,...this.replyFromData})
 				this.commentsValue = '';
 			},
 			setUpdateComment(content){
-				const formdata ={
+				const formdata = {
 					article_id:this.formData._id,
-					content
+					...content
 				}
 				// console.log(formdata);
 				uni.showLoading()
